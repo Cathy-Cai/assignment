@@ -26,11 +26,10 @@ tab_corr <- prepare_correlation_table(
 
 annual_growth <- aggregate(smp[,c(7,9)],by=list(smp$year),mean)
 annual_growth$year <- annual_growth$Group.1
-scaleFactor <- max(annual_growth$gdp_capita)/max(annual_growth$life_expectancy)
 fig_yearlyplot <-ggplot(data = annual_growth,mapping = aes(x=year))+
   geom_line(aes(y=gdp_capita),color = "#40E0D0",lwd=1)+
-  geom_line(aes(y=life_expectancy*scaleFactor),color = "#FFD700",lwd=1)+
-  scale_y_continuous(name = "gdp_capita",sec.axis = sec_axis(~./scaleFactor,name = "life_expectancy"))
+  geom_line(aes(y=life_expectancy*200),color = "#FFD700",lwd=1)+
+  scale_y_continuous(name = "gdp_capita",sec.axis = sec_axis(~./200,name = "life_expectancy"))
 fig_yearlyplot
 
 tab_regression <-  prepare_regression_table(
